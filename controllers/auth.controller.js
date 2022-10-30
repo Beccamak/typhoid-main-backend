@@ -1,6 +1,6 @@
 const {Validator} = require('node-input-validator');
 const register = require('../model/Register');
-const bcrypt = require('bcrypt');
+const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken')
 
 
@@ -52,7 +52,7 @@ exports.login = async (req, res) => {
     try{
         let userData = await register.findOne({email:req.body.email})
         if(userData){
-            if(bcrypt.compareSync(req.body.password, userData.password)){
+            if(bcryptjs.compareSync(req.body.password, userData.password)){
                 let jwt_secret = process.env.JWT_SECRET||'mysecret';
                 let token = jwt.sign({
                     data: userData
