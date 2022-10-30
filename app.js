@@ -5,7 +5,7 @@ const app = express();
 // To enable functionality of env variables
 require('dotenv').config()
 
-
+const port = process.env.PORT || 5000;
 
 // Auth Route required
 const authRoute = require('./routes/auth.route');
@@ -129,5 +129,5 @@ app.get('/allUsers', (req, res)=> {
 })
 
 app.listen(5000, () => {
-    console.log('Server is running on 5000!');
+    console.log(`Server is listening on port ${port}...`);
 })
