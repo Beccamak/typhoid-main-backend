@@ -2,7 +2,7 @@ const {Validator} = require('node-input-validator');
 const register = require('../model/Register');
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken')
-
+const fs = require('fs')
 
 exports.register = async (req, res) => {
     const v = new Validator(req.body, {
@@ -58,11 +58,13 @@ exports.login = async (req, res) => {
                     data: userData
                 }, jwt_secret, {expiresIn: '12h'})
 
-                return res.status(200).send({
-                    message: "Login sucessful",
-                    data: userData,
-                    token: token
-                })
+                return res.status(200).redirect("https://typhoid-image-model-backend.herokuapp.com/")
+                // Could have used this for the data
+                // return res.status(200).send({
+                //     message: "Login sucessful",
+                //     data: userData,
+                //     token: token
+                // })
             }else{
                 return res.status(400).send({
                     message: "Incorrect credentials",
