@@ -102,7 +102,10 @@ app.post('/comments', (req, res) => {
     const newComment = new Comment({ firstname, lastname, email, comment });
     newComment.save().then(() => {
         console.log("Message saved successfully!");
-        res.redirect("/comments");
+        // res.redirect("/comments");
+        res.status(200).send({
+            message: "Comment saved"
+        })
     }).catch((error) => {
         console.log(error);
         res.redirect("/404");
